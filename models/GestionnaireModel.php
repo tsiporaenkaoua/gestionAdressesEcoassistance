@@ -21,7 +21,8 @@ class GestionnaireModel{
     // S Q F
     public function getAllGestionnaires(){
         $sql = "SELECT * FROM gestionnaire";
-        $stmt = $this->pdo->query($sql);
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
