@@ -52,3 +52,12 @@ Fonctionnalités :
 ---
 
 💡 Si tu veux, je peux aussi te montrer **le CRUD complet typique que les profs attendent (Controller + Model + Views)** parce que **90% des étudiants le font mal en MVC**.
+
+
+
+UNE TABLE D ASSOCIATION DOIT PRENDRE EN COMPTE DES CHOSES PARTICULIERES
+
+✅ Pas de setters pour les clés → une fois créée, la relation est immuable (pareil pour toutes les classes normales)
+✅ Validations → vérifier que les deux clés existent dans leurs tables respectives
+✅ Requêtes supplémentaires → rechercher par gestionnaire seul, ou par syndic seul
+✅ Delete/Update → nécessitent toujours les DEUX clés

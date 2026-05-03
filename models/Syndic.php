@@ -39,4 +39,26 @@ class Syndic{
     public function isActif(){
         return   $this->actif;
    }
+   public function setRaisonSociale($raisonSociale){
+        $this->raisonSociale = $raisonSociale;  
+    }
+    public function setSiret($siret){
+        $this->siret = $siret;  
+    }   
+    public function setAdresse($adresse){
+        $this->adresse = $adresse;  
+    }
+    public function setCodePostal($codePostal){
+        $this->codePostal = $codePostal;  
+    }   
+    public function setVille($ville){
+        $this->ville = $ville;  
+    }
+    public function setActif($actif){
+        $this->actif = $actif;  
+    }
+
+    public function toString(){
+        return "Syndic [idSyndic=" . $this->idSyndic . ", raisonSociale=" . $this->raisonSociale . ", siret=" . $this->siret . ", adresse=" . $this->adresse . ", codePostal=" . $this->codePostal . ", ville=" . $this->ville . ", actif=" . $this->actif . "]";
+    }
 }

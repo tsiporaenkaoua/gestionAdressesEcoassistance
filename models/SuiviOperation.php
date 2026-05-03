@@ -1,56 +1,49 @@
 <?php
 
 class SuiviOperation{
-    private $pdo;
+    private $idAdresse;
+    private $statut;
+    private $dateIntervention;
+    private $dateFinIntervention;
+    private $idOperation;
  
 
-    public function __construct($pdo){
-        $this->pdo = $pdo;
-    }   
-
-    public function createSuiviOperation(SuiviOperationModel $suiviOperation){
-        $sql = "INSERT INTO suiviOperation (idAdresse, statut, dateIntervention, dateFinIntervention, idOperation) VALUES (:idAdresse, :statut, :dateIntervention, :dateFinIntervention, :idOperation)";
-        $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute([
-            ':idAdresse' => $suiviOperation->getIdAdresse(),
-            ':statut' => $suiviOperation->getStatut(),
-            ':dateIntervention' => $suiviOperation->getDateIntervention(),
-            ':dateFinIntervention' => $suiviOperation->getDateFinIntervention(),
-            ':idOperation' => $suiviOperation->getIdOperation()
-        ]);
+    public function __construct($idAdresse, $statut,$dateIntervention,$dateFinIntervention,$idOperation){
+        $this->idAdresse = $idAdresse;
+        $this->statut = $statut;
+        $this->dateIntervention = $dateIntervention;
+        $this->dateFinIntervention = $dateFinIntervention;
+        $this->idOperation = $idOperation;
     }
 
-    public function getAllSuiviOperations(){
-        $sql = "SELECT * FROM suiviOperation";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    public function getIdAdresse(){
+        return $this->idAdresse;        
     }
-
-    public function getSuiviOperation($idSuiviOperation){
-        $sql = "SELECT * FROM suiviOperation WHERE idSuiviOperation = :idSuiviOperation";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([':idSuiviOperation' => $idSuiviOperation]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+    public function getStatut(){
+        return $this->statut;        
     }
-
-    public function updateSuiviOperation(SuiviOperationModel $suiviOperation){
-        $sql = "UPDATE suiviOperation SET idAdresse = :idAdresse, statut = :statut, dateIntervention = :dateIntervention, dateFinIntervention = :dateFinIntervention, idOperation = :idOperation WHERE idSuiviOperation = :idSuiviOperation";
-        $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute([
-            ':idAdresse' => $suiviOperation->getIdAdresse(),
-            ':statut' => $suiviOperation->getStatut(),
-            ':dateIntervention' => $suiviOperation->getDateIntervention(),
-            ':dateFinIntervention' => $suiviOperation->getDateFinIntervention(),
-            ':idOperation' => $suiviOperation->getIdOperation(),
-            ':idSuiviOperation' => $suiviOperation->getIdSuiviOperation()
-        ]);
+    public function getDateIntervention(){
+        return $this->dateIntervention;        
     }
-
-    public function deleteSuiviOperation($idSuiviOperation){
-        $sql = "DELETE FROM suiviOperation WHERE idSuiviOperation = :idSuiviOperation";
-        $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute([':idSuiviOperation' => $idSuiviOperation]);
+    public function getDateFinIntervention(){
+        return $this->dateFinIntervention;        
     }
-
+    public function getIdOperation(){
+        return $this->idOperation;        
+    }
+    public function setStatut($statut){
+        $this->statut = $statut;        
+    }
+    public function setDateIntervention($dateIntervention){
+        $this->dateIntervention = $dateIntervention;        
+    }
+    public function setDateFinIntervention($dateFinIntervention){
+        $this->dateFinIntervention = $dateFinIntervention;        
+    }
+    public function setIdOperation($idOperation){
+        $this->idOperation = $idOperation;        
+    }
+    public function __toString(){
+        return "SuiviOperation [idAdresse=" . $this->idAdresse . ", statut=" . $this->statut . ", dateIntervention=" . $this->dateIntervention . ", dateFinIntervention=" . $this->dateFinIntervention . ", idOperation=" . $this->idOperation . "]";
+    }
 }

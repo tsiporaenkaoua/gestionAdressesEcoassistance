@@ -24,5 +24,23 @@ class Gestionnaire{
     public function isActif(){
         return $this->actif;
     }
+    public function getIdGestionnaire(){
+        return $this->idGestionnaire;
+    }
+
+    public function setNom($nom){
+        $this->nom = $nom;
+    }
+    public function setPrenom($prenom){
+        $this->prenom = $prenom;
+    }
+    public function setActif($actif){
+        $this->actif = $actif;
+    }
+
+    public function __toString(){
+        return "Gestionnaire [idGestionnaire=" . $this->idGestionnaire . ", nom=" . $this->nom . ", prenom=" . $this->prenom . ", actif=" . $this->actif . "]";
+    }
+
     
 }
