@@ -8,18 +8,18 @@ class GestionnaireModel{
     }
 
     // S P E
-    public function createGestionnaire(Gestionnaire $gestionnaire){
+    public function create(array $data){
         $sql = "INSERT INTO gestionnaire(nom, prenom, actif) VALUES (:nom, :prenom, :actif)";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([
-            ':nom' => $gestionnaire->getNom(),
-            ':prenom'=> $gestionnaire->getPrenom(), 
-            ':actif' => $gestionnaire->isActif()
+            ':nom' => $data['nom'],
+            ':prenom'=> $data['prenom'], 
+            ':actif' => $data['actif']
         ]);
     }
 
     // S Q F
-    public function getAllGestionnaires(){
+    public function getAll(){
         $sql = "SELECT * FROM gestionnaire";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
@@ -27,30 +27,32 @@ class GestionnaireModel{
     }
 
     // S P E F 
-    public function getGestionnaire($idGestionnaire){
+    public function getById($idGestionnaire){
         $sql = "SELECT * FROM gestionnaire WHERE idGestionnaire = :idGestionnaire";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([ ':idestionnaire' => $idGestionnaire]);
+        $stmt->execute([ ':idGestionnaire' => $idGestionnaire]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     //S P E
-    public function updateGestionnaire(Gestionnaire $gestionnaire){
-        $sql = "UPDATE FROM gestionnaire 
-        SET  nom =':nom', prenom = ':prenom', actif =':actif'";
+    public function update($id, array $data){
+        $sql = "UPDATE gestionnaire 
+        SET  nom =:nom, prenom = :prenom, actif =:actif
+        WHERE idGestionnaire = :idGestionnaire";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([
-             ':nom' => $gestionnaire->getNom(),
-            ':prenom'=> $gestionnaire->getPrenom(), 
-            ':actif' => $gestionnaire->isActif()
+             ':nom' => $data['nom'],
+            ':prenom'=> $data['prenom'], 
+            ':actif' => $data['actif'],
+            ':idGestionnaire' => $id        
         ]);
     }
 
     // S P E
-    public function deleteGestionnaire($idGestionnaire){
+    public function delete($idGestionnaire){
         $sql = "DELETE FROM gestionnaire WHERE idGestionnaire = :idGestionnaire";
         $stmt = $this->pdo->prepare($sql);
-        return  $stmt->execute([ ':idestionnaire' => $idGestionnaire]);
+        return  $stmt->execute([ ':idGestionnaire' => $idGestionnaire]);
     }
     
 }

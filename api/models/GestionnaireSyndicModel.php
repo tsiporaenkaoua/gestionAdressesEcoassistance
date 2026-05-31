@@ -7,15 +7,15 @@ class GestionnaireSyndicModel{
         $this->pdo = $pdo;
     }
 
-    public function create(GestionnaireSyndic $gestionnaireSyndic){
+    public function create(array $data){
         $sql = "INSERT INTO gestionnairesyndic(idGestionnaire,idSyndic,mail,tel)
         VALUES (:idGestionnaire,:idSyndic,:mail,:tel)";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([
-            ':idGestionnaire' => $gestionnaireSyndic->getIdGestionnaire(),
-            ':idSyndic' => $gestionnaireSyndic->getIdSyndic(),
-            ':mail' => $gestionnaireSyndic->getMail(),
-            ':tel' => $gestionnaireSyndic->getTel()
+            ':idGestionnaire' => $data['idGestionnaire'],
+            ':idSyndic' => $data['idSyndic'],
+            ':mail' => $data['mail'],
+            ':tel' => $data['tel']
         ]);
     }
 
@@ -36,14 +36,14 @@ class GestionnaireSyndicModel{
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function updateGestionnaireSyndic(GestionnaireSyndic $gestionnaireSyndic){
+    public function updateGestionnaireSyndic(array $data){
         $sql = "UPDATE gestionnairesyndic SET mail = :mail, tel = :tel WHERE idGestionnaire = :idGestionnaire AND idSyndic = :idSyndic";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([
-            ':mail' => $gestionnaireSyndic->getMail(),
-            ':tel' => $gestionnaireSyndic->getTel(),
-            ':idGestionnaire' => $gestionnaireSyndic->getIdGestionnaire(),
-            ':idSyndic' => $gestionnaireSyndic->getIdSyndic()
+            ':mail' => $data['mail'],
+            ':tel' => $data['tel'],
+            ':idGestionnaire' => $data['idGestionnaire'],
+            ':idSyndic' => $data['idSyndic']
         ]);
 
     }

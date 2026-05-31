@@ -3,7 +3,8 @@ spl_autoload_register(function($class){
     $paths = [
         "controllers/",
         "models/",
-        "core/"
+        "core/",
+        "services/"
     ];
 
     foreach($paths as $path){

@@ -8,15 +8,15 @@ class SuiviOperationModel{
         $this->pdo = $pdo;
     }   
 
-    public function createSuiviOperation(SuiviOperation $suiviOperation){
+    public function createSuiviOperation(array $data){
         $sql = "INSERT INTO suiviOperation (idAdresse, statut, dateIntervention, dateFinIntervention, idOperation) VALUES (:idAdresse, :statut, :dateIntervention, :dateFinIntervention, :idOperation)";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([
-            ':idAdresse' => $suiviOperation->getIdAdresse(),
-            ':statut' => $suiviOperation->getStatut(),
-            ':dateIntervention' => $suiviOperation->getDateIntervention(),
-            ':dateFinIntervention' => $suiviOperation->getDateFinIntervention(),
-            ':idOperation' => $suiviOperation->getIdOperation()
+            ':idAdresse' => $data['idAdresse'],
+            ':statut' => $data['statut'],
+            ':dateIntervention' => $data['dateIntervention'],
+            ':dateFinIntervention' => $data['dateFinIntervention'],
+            ':idOperation' => $data['idOperation']
         ]);
     }
 
@@ -34,16 +34,16 @@ class SuiviOperationModel{
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function updateSuiviOperation(SuiviOperation $suiviOperation){
+    public function updateSuiviOperation(array $data){
         $sql = "UPDATE suiviOperation SET idAdresse = :idAdresse, statut = :statut, dateIntervention = :dateIntervention, dateFinIntervention = :dateFinIntervention, idOperation = :idOperation WHERE idSuiviOperation = :idSuiviOperation";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([
-            ':idAdresse' => $suiviOperation->getIdAdresse(),
-            ':statut' => $suiviOperation->getStatut(),
-            ':dateIntervention' => $suiviOperation->getDateIntervention(),
-            ':dateFinIntervention' => $suiviOperation->getDateFinIntervention(),
-            ':idOperation' => $suiviOperation->getIdOperation(),
-            ':idSuiviOperation' => $suiviOperation->getIdSuiviOperation()
+            ':idAdresse' => $data['idAdresse'],
+            ':statut' => $data['statut'],
+            ':dateIntervention' => $data['dateIntervention'],
+            ':dateFinIntervention' => $data['dateFinIntervention'],
+            ':idOperation' => $data['idOperation'],
+            ':idSuiviOperation' => $data['idSuiviOperation']
         ]);
     }
 

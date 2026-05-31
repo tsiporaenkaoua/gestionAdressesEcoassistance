@@ -7,17 +7,17 @@ class SyndicModel{
         $this->pdo = $pdo;
     }
 
-    public function createSyndic(Syndic $syndic){
+    public function createSyndic(array $data){
         $sql = "INSERT INTO syndic (raisonSociale,siret,adresse,codePostal,ville,actif)
         VALUES (:raisonSociale,:siret,:adresse,:codePostal,:ville,:actif)";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([
-            ':raisonSociale' => $syndic->getRaisonSociale(),
-            ':siret' => $syndic->getSiret(),
-            ':adresse' => $syndic->getAdresse(),
-            ':codePostal' => $syndic->getCodePostal(),
-            ':ville' => $syndic->getVille(),
-            ':actif' => $syndic->isActif()
+            ':raisonSociale' => $data['raisonSociale'],
+            ':siret' => $data['siret'],
+            ':adresse' => $data['adresse'],
+            ':codePostal' => $data['codePostal'],
+            ':ville' => $data['ville'],
+            ':actif' => $data['actif']
         ]);
     }
 
@@ -35,19 +35,19 @@ class SyndicModel{
         return $stmt->fetch(PDO::FETCH_ASSOC);  
     }
 
-    public function updateSyndic(Syndic $syndic){
+    public function updateSyndic(array $data){
         $sql = "UPDATE syndic
         SET raisonSociale = :raisonSociale, siret = :siret, adresse = :adresse, codePostal = :codePostal, ville = :ville, actif = :actif
         WHERE idSyndic = :idSyndic";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([
-            ':raisonSociale' => $syndic->getRaisonSociale(),
-            ':siret' => $syndic->getSiret(),
-            ':adresse' => $syndic->getAdresse(),
-            ':codePostal' => $syndic->getCodePostal(),
-            ':ville' => $syndic->getVille(),
-            ':actif' => $syndic->isActif(),
-            ':idSyndic' => $syndic->getIdSyndic()
+            ':raisonSociale' => $data['raisonSociale'],
+            ':siret' => $data['siret'],
+            ':adresse' => $data['adresse'],
+            ':codePostal' => $data['codePostal'],
+            ':ville' => $data['ville'],
+            ':actif' => $data['actif'],
+            ':idSyndic' => $data['idSyndic']
         ]);
     }
 

@@ -7,10 +7,10 @@ class OperationModel{
         $this->pdo = $pdo;
     }
 
-    public function createOperation(Operation $operation){
+    public function createOperation(array $data){
         $sql = "INSERT INTO operation (nom) VALUES (:nom) ";
         $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute([':nom'=> $operation->getNom()]);
+        return $stmt->execute([':nom'=> $data['nom'] ]);
     }
 
     public function getAllOperations(){
@@ -27,12 +27,12 @@ class OperationModel{
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function updateOperation(Operation $operation){
+    public function updateOperation(array $data){
         $sql = "UPDATE operation SET nom = :nom WHERE idOperation = :idOperation";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([
-            ':idOperation'=>$operation->getIdOperation(),
-            ':nom' => $operation->getNom()]);
+            ':idOperation'=>$data['idOperation'],
+            ':nom' => $data['nom']]);
     }
 
     public function deleteOperation($idOperation){
