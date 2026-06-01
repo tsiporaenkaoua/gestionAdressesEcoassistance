@@ -19,14 +19,14 @@ class GestionnaireSyndicModel{
         ]);
     }
 
-    public function getAllGestionnaireSyndic(){
+    public function getAll(){
         $sql = "SELECT * FROM gestionnairesyndic";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getGestionnaireSyndic($idGestionnaire, $idSyndic){
+    public function getById($idGestionnaire, $idSyndic){
         $sql = "SELECT * FROM gestionnairesyndic WHERE  idGestionnaire = :idGestionnaire AND idSyndic = :idSyndic";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
@@ -36,16 +36,17 @@ class GestionnaireSyndicModel{
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function updateGestionnaireSyndic(array $data){
+   public function updateGestionnaireSyndic($idGestionnaire, $idSyndic, array $data){
         $sql = "UPDATE gestionnairesyndic SET mail = :mail, tel = :tel WHERE idGestionnaire = :idGestionnaire AND idSyndic = :idSyndic";
+
         $stmt = $this->pdo->prepare($sql);
+
         return $stmt->execute([
             ':mail' => $data['mail'],
             ':tel' => $data['tel'],
-            ':idGestionnaire' => $data['idGestionnaire'],
-            ':idSyndic' => $data['idSyndic']
+            ':idGestionnaire' => $idGestionnaire,
+            ':idSyndic' => $idSyndic
         ]);
-
     }
 
     public function deleteGestionnaireSyndic($idGestionnaire, $idSyndic){

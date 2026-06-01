@@ -3,10 +3,9 @@
 require_once "core/autoload.php";
 require_once "config/database.php";
 
-// indique au client que les réponses seront au format JSON
 header("Content-Type: application/json");
 
-// Message d'accueil pour la route de base /api
+// Message d'accueil
 if ($_SERVER['REQUEST_URI'] === "/api" || $_SERVER['REQUEST_URI'] === "/api/") {
     echo json_encode(["message" => "API ECOASSISTANCE"]);
     exit;
@@ -20,36 +19,70 @@ if ($uri[0] === "api") {
     array_shift($uri);
 }
 
-// recupere la méthode HTTP = get, post...
-$method = $_SERVER['REQUEST_METHOD'];
+$entity = $uri[0] ?? null;
+$id1    = $uri[1] ?? null;
+$id2    = $uri[2] ?? null;
 
-// Liste des routes disponibles
+// Liste des routes
 $routes = [
-    "adresses"      => "AdresseController",
-    "gestionnaires" => "GestionnaireController",
-    "syndics"       => "SyndicController"
+    "adresses"            => "AdresseController",
+    "gestionnaires"       => "GestionnaireController",
+    "syndics"             => "SyndicController",
+    "gestionnairesSyndics" => "GestionnaireSyndicController"
 ];
 
-// Vérifie que la route existe
-$entity = $uri[0] ?? null;
-
+// Vérification de la route
 if (!isset($routes[$entity])) {
     http_response_code(404);
     echo json_encode(["error" => "Route introuvable"]);
     exit;
 }
 
-// ID éventuel
-$id = $uri[1] ?? null;
-
-// Instanciation dynamique du controller
+// Instanciation du controller
 $controllerName = $routes[$entity];
 $controller = new $controllerName($pdo);
 
-// Routage dynamique
-switch($method){
+// Méthode HTTP
+$method = $_SERVER['REQUEST_METHOD'];
+
+// Gestion des routes avec 2 IDs (clé composite)
+if ($entity === "gestionnairesSyndic") {
+
+    switch ($method) {
+
+        case "GET":
+            if ($id1 && $id2) {
+                $controller->show($id1, $id2);
+            } elseif ($id1) {
+                $controller->showByGestionnaire($id1);
+            } elseif ($id2) {
+                $controller->showBySyndic($id2);
+            } else {
+                $controller->index();
+            }
+            break;
+
+        case "POST":
+            $controller->store();
+            break;
+
+        case "PUT":
+            $controller->update($id1, $id2);
+            break;
+
+        case "DELETE":
+            $controller->delete($id1, $id2);
+            break;
+    }
+
+    exit;
+}
+
+// Routes classiques (1 ID)
+switch ($method) {
+
     case "GET":
-        $id ? $controller->show($id) : $controller->index();
+        $id1 ? $controller->show($id1) : $controller->index();
         break;
 
     case "POST":
@@ -57,11 +90,11 @@ switch($method){
         break;
 
     case "PUT":
-        $controller->update($id);
+        $controller->update($id1);
         break;
 
     case "DELETE":
-        $controller->delete($id);
+        $controller->delete($id1);
         break;
 
     default:

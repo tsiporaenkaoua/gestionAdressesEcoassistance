@@ -2,7 +2,7 @@
 
 class AdresseService {
 
-    public function validate(array &$data){
+    public function validate(array &$data){ //La fonction modifie la vraie variable et non une copie (ce qui se passe si on met pas &) Les changements sont visibles après l’appel
 
         // 1. Vérification des champs obligatoires
         $required = ['adresse', 'codePostal', 'ville', 'idGestionnaire'];
@@ -13,7 +13,7 @@ class AdresseService {
             }
         }
 
-        // 2. Nettoyage des données
+        // 2. Nettoyage des données String
         $data['adresse'] = trim($data['adresse']);
         $data['ville'] = trim($data['ville']); 
         $data['codePostal'] = trim($data['codePostal']);

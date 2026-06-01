@@ -2,7 +2,8 @@
 
 class GestionnaireService {
 
-    public function validate(array &$data){
+    public function validate(array &$data){ // un array en PHP n’est PAS juste une liste, c’est une structure clé → valeur par défaut.
+
 
         // 1. Vérification des champs obligatoires 
         $required = ['nom', 'prenom', 'actif'];
@@ -13,12 +14,12 @@ class GestionnaireService {
             }
         }
 
-        // 2. Nettoyage des données
+        // 2. Nettoyage des données String
         $data['nom'] = trim($data['nom']);
         $data['prenom'] = trim($data['prenom']); 
 
-         // 3. Vérification que nom/prenom ne sont pas vides
-         if (trim($data['nom']) === '' ||trim($data['prenom']) === ''){
+         // 3. Vérification que les champs String ne sont pas vides
+         if ($data['nom'] === '' ||$data['prenom'] === ''){
             throw new Exception("Les champs 'nom' et 'prenom' ne peuvent pas être vides");
         }
 

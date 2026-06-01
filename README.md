@@ -1,8 +1,5 @@
 Création d'une API qui s'occupe de la gestion des sites par les gestionnaires et syndics
 
-
-
-
 UNE TABLE D ASSOCIATION DOIT PRENDRE EN COMPTE DES CHOSES PARTICULIERES
 
 ✅ Pas de setters pour les clés → une fois créée, la relation est immuable (pareil pour toutes les classes normales)
@@ -12,7 +9,7 @@ UNE TABLE D ASSOCIATION DOIT PRENDRE EN COMPTE DES CHOSES PARTICULIERES
 
 
 MODEL (lien avc BDD) : CRUD
-ENTITE (POO) : getters setters et init d'instance
+(ENTITE (POO) : getters setters et init d'instance)
 CONTROLLER : controller basique puis petit controller pr chaque classe qui herite du controller basique
 service : 
 ROUTER : 
@@ -49,10 +46,11 @@ FAIRE LES TESTS : adresses/gest/
 - pr le reste hoopscotch (similaire a postman qui etait galere ne voulait pas s'activer)
 
 
-(adresse, gest ok)
+(adresse, gest, syndic ok)
 Service 
 Controller
 continuer les autres controllers
+
 
  
 
