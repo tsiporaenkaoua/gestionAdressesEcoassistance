@@ -28,6 +28,7 @@ $routes = [
     "adresses"            => "AdresseController",
     "gestionnaires"       => "GestionnaireController",
     "syndics"             => "SyndicController",
+    "operations"             => "Operation",
     "gestionnairesSyndics" => "GestionnaireSyndicController"
 ];
 
