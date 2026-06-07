@@ -46,8 +46,16 @@ $controller = new $controllerName($pdo);
 $method = $_SERVER['REQUEST_METHOD'];
 
 // Gestion des routes avec 2 IDs (clé composite)
-if ($entity === "gestionnairesSyndic") {
+if ($entity === "gestionnairesSyndics") {
 
+    // Exemple : /gestionnairesSyndic/syndic/5 - c'est pour que visuellement dans l'url on ait pas un trou au niv de id1
+    // Mais c'est comme si on avait fait /gestionnairesSyndic/0/5
+    if (isset($uri[1]) && $uri[1] === "syndic") {
+        $id1 = null;          // on désactive id1
+        $id2 = $uri[2] ?? null; // id2 devient l'id du syndic
+    }
+
+// Gestion des routes avec 2 IDs (clé composite)
     switch ($method) {
 
         case "GET":

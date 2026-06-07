@@ -1,5 +1,8 @@
 {
     "require-dev": {
         "phpunit/phpunit": "*"
+    },
+    "require": {
+        "fakerphp/faker": "^1.24"
     }
 }

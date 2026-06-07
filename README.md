@@ -7,12 +7,7 @@ UNE TABLE D ASSOCIATION DOIT PRENDRE EN COMPTE DES CHOSES PARTICULIERES
 ✅ Requêtes supplémentaires → rechercher par gestionnaire seul, ou par syndic seul
 ✅ Delete/Update → nécessitent toujours les DEUX clés
 
-
-MODEL (lien avc BDD) : CRUD
-(ENTITE (POO) : getters setters et init d'instance)
-CONTROLLER : controller basique puis petit controller pr chaque classe qui herite du controller basique
-service : 
-ROUTER : 
+ 
 TESTS
 
 1. baseController : controller generique
@@ -37,19 +32,19 @@ il indique :
 4. routeur dans l'index
 il route vers le bon controller
 
-BaseController 
-AdresseService 
-AdresseController 
-routeur dans index 
-FAIRE LES TESTS : adresses/gest/
+
+ LES TESTS : adresses/gest/
 -tests curl en commande pour les endpoint de adresses
 - pr le reste hoopscotch (similaire a postman qui etait galere ne voulait pas s'activer)
+- remplissage de la base de donnée avec faker pour pouvoir tester tranquillement mes endpoints
 
 
-(adresse, gest, syndic ok)
+(adresse, gest, syndic, gestSyndic ok)
 Service 
 Controller
-continuer les autres controllers
+TESTS
+
+CONTINUER AUTRES CONTROLLEURS
 
 
  
