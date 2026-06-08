@@ -28,8 +28,9 @@ $routes = [
     "adresses"            => "AdresseController",
     "gestionnaires"       => "GestionnaireController",
     "syndics"             => "SyndicController",
-    "operations"             => "Operation",
-    "gestionnairesSyndics" => "GestionnaireSyndicController"
+    "operations"             => "OperationController",
+    "gestionnairesSyndics" => "GestionnaireSyndicController",
+    "suiviOperations" => "SuiviOperationController"
 ];
 
 // Vérification de la route
@@ -47,11 +48,11 @@ $controller = new $controllerName($pdo);
 $method = $_SERVER['REQUEST_METHOD'];
 
 // Gestion des routes avec 2 IDs (clé composite)
-if ($entity === "gestionnairesSyndics") {
+if ($entity === "gestionnairesSyndics" || $entity === "suiviOperations") {
 
     // Exemple : /gestionnairesSyndic/syndic/5 - c'est pour que visuellement dans l'url on ait pas un trou au niv de id1
     // Mais c'est comme si on avait fait /gestionnairesSyndic/0/5
-    if (isset($uri[1]) && $uri[1] === "syndic") {
+    if (isset($uri[1]) && $uri[1] === "syndic" || isset($uri[1]) && $uri[1] === "adresse") {
         $id1 = null;          // on désactive id1
         $id2 = $uri[2] ?? null; // id2 devient l'id du syndic
     }
@@ -63,9 +64,9 @@ if ($entity === "gestionnairesSyndics") {
             if ($id1 && $id2) {
                 $controller->show($id1, $id2);
             } elseif ($id1) {
-                $controller->showByGestionnaire($id1);
+                $controller->showByFirstId($id1); //showByGestionnaire ||  
             } elseif ($id2) {
-                $controller->showBySyndic($id2);
+                $controller->showBySecondId($id2); //showBySyndic ||  
             } else {
                 $controller->index();
             }

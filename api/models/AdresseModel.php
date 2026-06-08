@@ -64,7 +64,3 @@ class AdresseModel{
     }
 }
 
-/*retourner des objets partout
-utiliser hydrate()
-gérer les relations (Gestionnaire)
-*/

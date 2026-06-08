@@ -57,4 +57,3 @@ class GestionnaireModel{
     
 }
 
-// transformer  les retours (getAll et get) en objet

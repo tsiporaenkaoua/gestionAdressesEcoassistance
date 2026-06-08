@@ -39,12 +39,22 @@ il route vers le bon controller
 - remplissage de la base de donnée avec faker pour pouvoir tester tranquillement mes endpoints
 
 
-(adresse, gest, syndic, gestSyndic ok)
+(adresse, gest, syndic, gestSyndic , operation ok)
 Service 
 Controller
 TESTS
 
-CONTINUER AUTRES CONTROLLERS
+CONTINUER SUIVI OPERATION APRES C FINI
+
+APRES TESTS UNITAIRES?  ET COTE REACT
+
+Suivi operation :
+verifier que la fonction exist ne doit pas etre utilisée dans le service en tant que validation
+faire le controller et le service 
+tester
+
+
+Gestion d’erreurs PDO → try/catch + logs pour les models
 
 
  

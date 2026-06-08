@@ -26,7 +26,7 @@ class GestionnaireSyndicModel{
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getById($idGestionnaire, $idSyndic){
+    public function getByIds($idGestionnaire, $idSyndic){
         $sql = "SELECT * FROM gestionnairesyndic WHERE  idGestionnaire = :idGestionnaire AND idSyndic = :idSyndic";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
@@ -35,6 +35,23 @@ class GestionnaireSyndicModel{
         ]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    // Rechercher par gestionnaire seul
+    public function getByGestionnaire($idGestionnaire){
+        $sql = "SELECT * FROM gestionnairesyndic WHERE idGestionnaire = :idGestionnaire";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':idGestionnaire' => $idGestionnaire]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Rechercher par syndic seul
+    public function getBySyndic($idSyndic){
+        $sql = "SELECT * FROM gestionnairesyndic WHERE idSyndic = :idSyndic";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':idSyndic' => $idSyndic]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 
    public function updateGestionnaireSyndic($idGestionnaire, $idSyndic, array $data){
         $sql = "UPDATE gestionnairesyndic SET mail = :mail, tel = :tel WHERE idGestionnaire = :idGestionnaire AND idSyndic = :idSyndic";
@@ -56,22 +73,6 @@ class GestionnaireSyndicModel{
             ':idGestionnaire' => $idGestionnaire,
                 ':idSyndic' => $idSyndic
             ]);
-    }
-
-    // Rechercher par gestionnaire seul
-    public function getGestionnaireSyndicByGestionnaire($idGestionnaire){
-        $sql = "SELECT * FROM gestionnairesyndic WHERE idGestionnaire = :idGestionnaire";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([':idGestionnaire' => $idGestionnaire]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    // Rechercher par syndic seul
-    public function getGestionnaireSyndicBySyndic($idSyndic){
-        $sql = "SELECT * FROM gestionnairesyndic WHERE idSyndic = :idSyndic";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([':idSyndic' => $idSyndic]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Vérifier si une association existe

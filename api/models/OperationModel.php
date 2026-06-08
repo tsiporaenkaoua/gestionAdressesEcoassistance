@@ -20,7 +20,7 @@ class OperationModel{
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getById($idOperation){
+    public function getByOperation($idOperation){
         $sql = "SELECT* FROM operation WHERE idOperation = :idOperation";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([':idOperation'=>$idOperation]);
@@ -40,5 +40,7 @@ class OperationModel{
         $stmt= $this->pdo->prepare($sql);
         return $stmt->execute([':idOperation'=>$idOperation]);
     }
+
+    
 
 }

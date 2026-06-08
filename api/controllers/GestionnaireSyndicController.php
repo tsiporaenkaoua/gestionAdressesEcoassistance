@@ -14,20 +14,21 @@ class GestionnaireSyndicController {
     }
 
     public function show($idGestionnaire, $idSyndic) {
-        echo json_encode($this->model->getById($idGestionnaire, $idSyndic));
+        echo json_encode($this->model->getByIds($idGestionnaire, $idSyndic));
     }
 
     public function showByGestionnaire($idGestionnaire) {
-        echo json_encode($this->model->getGestionnaireSyndicByGestionnaire($idGestionnaire));
+        echo json_encode($this->model->getByGestionnaire($idGestionnaire));
     }
 
     public function showBySyndic($idSyndic) {
-        echo json_encode($this->model->getGestionnaireSyndicBySyndic($idSyndic));
+        echo json_encode($this->model->getBySyndic($idSyndic));
     }
 
     public function store() {
         $data = json_decode(file_get_contents("php://input"), true);
         $this->service->validate($data);
+        $this->service->checkDuplicate($this->model, $data);
         $this->model->create($data);
         echo json_encode(["success" => true]);
     }
@@ -43,4 +44,12 @@ class GestionnaireSyndicController {
         $this->model->deleteGestionnaireSyndic($idGestionnaire, $idSyndic);
         echo json_encode(["success" => true]);
     }
+
+    public function showByFirstId($idGestionnaire){
+        return $this->showByGestionnaire($idGestionnaire);
+    }
+
+    public function showBySecondId($id) {
+    return $this->showBySyndic($id);
+}
 }
