@@ -33,26 +33,16 @@ il indique :
 il route vers le bon controller
 
 
- LES TESTS : adresses/gest/
+ LES TESTS : 
 -tests curl en commande pour les endpoint de adresses
 - pr le reste hoopscotch (similaire a postman qui etait galere ne voulait pas s'activer)
 - remplissage de la base de donnée avec faker pour pouvoir tester tranquillement mes endpoints
 
 
-(adresse, gest, syndic, gestSyndic , operation ok)
+(adresse, gest, syndic, gestSyndic , operation, SUIVIOPERATION ok)
 Service 
 Controller
-TESTS
-
-CONTINUER SUIVI OPERATION APRES C FINI
-
-APRES TESTS UNITAIRES?  ET COTE REACT
-
-Suivi operation :
-verifier que la fonction exist ne doit pas etre utilisée dans le service en tant que validation
-faire le controller et le service 
-tester
-
+TESTS API
 
 Gestion d’erreurs PDO → try/catch + logs pour les models
 

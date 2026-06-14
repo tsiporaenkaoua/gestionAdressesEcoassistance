@@ -36,6 +36,6 @@
         public function checkDuplicate( $model,array $data){
             if ($model->existsGestionnaireSyndic($data['idGestionnaire'], $data['idSyndic'])) {
                 throw new Exception("Ce gestionnaire est déjà associé à ce syndic");
-    }
+        }
 }
     }

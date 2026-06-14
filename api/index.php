@@ -52,9 +52,9 @@ if ($entity === "gestionnairesSyndics" || $entity === "suiviOperations") {
 
     // Exemple : /gestionnairesSyndic/syndic/5 - c'est pour que visuellement dans l'url on ait pas un trou au niv de id1
     // Mais c'est comme si on avait fait /gestionnairesSyndic/0/5
-    if (isset($uri[1]) && $uri[1] === "syndic" || isset($uri[1]) && $uri[1] === "adresse") {
+    if (isset($uri[1]) && $uri[1] === "syndic" || isset($uri[1]) && $uri[1] === "operation") {
         $id1 = null;          // on désactive id1
-        $id2 = $uri[2] ?? null; // id2 devient l'id du syndic
+        $id2 = $uri[2] ?? null; // id2 devient l'id du syndic ou de l'operation
     }
 
 // Gestion des routes avec 2 IDs (clé composite)
@@ -64,9 +64,9 @@ if ($entity === "gestionnairesSyndics" || $entity === "suiviOperations") {
             if ($id1 && $id2) {
                 $controller->show($id1, $id2);
             } elseif ($id1) {
-                $controller->showByFirstId($id1); //showByGestionnaire ||  
+                $controller->showByFirstId($id1); //showByGestionnaire ||  showByAdresse
             } elseif ($id2) {
-                $controller->showBySecondId($id2); //showBySyndic ||  
+                $controller->showBySecondId($id2); //showBySyndic ||  showByOperation
             } else {
                 $controller->index();
             }

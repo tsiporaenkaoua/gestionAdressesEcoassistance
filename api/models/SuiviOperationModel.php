@@ -62,7 +62,7 @@ class SuiviOperationModel{
         ]);
     }
 
-    public function deleteSuiviOperation($idAdresse, $idOperation){
+    public function delete($idAdresse, $idOperation){
         $sql = "DELETE FROM suiviOperation WHERE idAdresse = :idAdresse AND idOperation = :idOperation ";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([':idAdresse' => $idAdresse,
